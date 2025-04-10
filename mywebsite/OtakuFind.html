@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tes.css">
+    <title>OtakuFind - Home Page</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Bebas Neue', 'Roboto Condensed', sans-serif;
+            background-color: #050505;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .background-video video {
+            object-fit: cover;
+            min-width: 100%;
+            min-height: 100%;
+            filter: brightness(1.1) contrast(1.1) saturate(1.2);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header {
+            background: rgba(10, 10, 10, 0.98);
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 3;
+            box-shadow: 0 8px 16px rgba(255, 0, 0, 0.2), inset 0 0 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 45px;
+            margin-right: 15px;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        header nav ul li {
+            margin: 0 10px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            text-shadow: 2px 2px 0 #222;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        header nav ul li a:hover {
+            color: #ff2020;
+            text-shadow: 3px 3px 0 #000;
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: 5%;
+            transform: translateX(0%) scaleX(0);
+            width: 90%;
+            height: 5px;
+            background: linear-gradient(to right, #ff2020, #fff);
+            transition: transform 0.3s ease;
+        }
+
+        header nav ul li a:hover::after {
+            transform: translateX(0%) scaleX(1);
+        }
+
+        .hero-middle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            z-index: 2; 
+            width: 80%;
+            max-width: 900px; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        .hero-middle .logo-home {
+            margin-bottom: 20px; 
+        }
+
+        .hero-middle .logo-home img {
+            max-width: 300px; 
+            height: auto;
+        }
+
+        .hero-middle h1 {
+            font-size: 3.5em; 
+            font-weight: 900;
+            text-shadow: 2px 2px 0 #ff2020, 4px 4px 0 #000;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .hero-middle h3 { 
+            font-size: 1.3em;
+            font-weight: bold;
+            text-shadow: 2px 2px 0 #000;
+            opacity: 0.8;
+            margin-top: 0;
+            margin-bottom: 30px; 
+        }
+
+       
+        .age-category-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px; 
+        }
+
+        .age-category-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5em; 
+            font-weight: bold;
+            padding: 15px 30px; 
+            border: 3px solid #fff; 
+            border-radius: 8px; 
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .age-category-links a:hover {
+            background-color: #ff2020;
+            color: #000;
+            border-color: #ff2020;
+        }
+
+        @keyframes fadeInTopMiddleTitle {
+            from {
+                transform: translateY(-30px) translateX(-50%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) translateX(-50%);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInTopMiddleSubtitle {
+            from {
+                transform: translateY(-20px) translateX(-50%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) translateX(-50%);
+                opacity: 1;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            background: rgba(10, 10, 10, 0.98);
+            color: #fff;
+            font-size: 1.1em;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 3;
+            box-shadow: 0 -8px 16px rgba(255, 0, 0, 0.2), inset 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-video">
+        <video id="videoPlayer" loop muted autoplay>
+            <source src="hime.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="overlay"></div>
+<header>
+        <div class="logo">
+            <a href="OtakuFind.html"><img src="Black Otaku.PNG" alt="OtakuFind"></a>
+            <nav> <ul>
+                    <li><a href="OtakuFind.html">Home</a></li>
+                    <li><a href="TopAnime.html">Top Picks</a></li>
+                    <li><a href="#">Fan Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+        <nav> <ul>
+                <li><a href="Developers.html">Developers</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="About.html">About</a></li>
+            </ul>
+        </nav>
+</header>
+
+    <div class="hero-middle">
+        <div class="logo-home">
+            <img src="Luga.png" alt="Home Logo">
+        </div>
+        <h1>The Anime Website For Everyone</h1>
+        <h3>Discover a universe of anime, from timeless classics to the latest hits!</h3>
+        <div class="age-category-links">
+            <a href="Adult.html">Adults</a>
+            <a href="Teens.html">Teens</a>
+            <a href="Kids.html">Kids</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 OtakuFind - Discover Your Next Favorite Anime</p>
+    </footer>
+
+</body>
+</html>

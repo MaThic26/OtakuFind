@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jujutsu Kaisen - Inspired by Netflix</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars when video is full screen */
+            font-family: sans-serif; /* A more modern default font */
+            background-color: #141414; /* Netflix-like dark background if video fails to load */
+            color: #fff; /* Default text color to white */
+        }
+
+        .background-video {
+            position: fixed; /* Fixed positioning to cover the entire viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure video covers the entire area without distortion */
+            z-index: -1; /* Place video behind other content */
+        }
+
+        .background-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content-overlay {
+            position: absolute; /* Position content over the video */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex; /* Use flexbox for easier layout control */
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: center; /* Center content vertically */
+            align-items: flex-start; /* Align content to the left (like Netflix) */
+            padding: 20px 50px; /* Add more substantial padding */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+            /* Add a subtle gradient overlay for better text readability on the video */
+            background: linear-gradient(to top, transparent 20%, rgba(0, 0, 0, 0.6) 80%);
+        }
+
+        .title {
+            font-size: 3em; /* Larger title */
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .metadata {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .genre {
+            color: #e50914; /* Netflix red accent color */
+        }
+
+        .description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            max-width: 600px; /* Limit width for better readability */
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .watch-button {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .watch-button.playing {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .add-button {
+            background-color: rgba(255, 255, 255, 0.5);
+            color: white;
+            border: 1px solid white;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Remove the extra <br> tags and the second <h1> */
+    </style>
+</head>
+<body>
+    <div class="background-video">
+        <video id="videoPlayer" loop muted>
+            <source src="Traile JJK.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+<br><br><br><br><br><br><br><br><br><br><br>
+    <div class="content-overlay">
+        <h1 class="title">Jujutsu Kaisen</h1>
+        <p class="metadata">
+            Genre: <span class="genre">Adventure</span> · <span class="genre">Dark Fantasy</span> · <span class="genre">Supernatural</span> · <span class="genre">Manga</span>
+        </p>
+        <p class="description">
+            <span class="genre">Jujutsu Kaisen</span> is a Japanese manga series written and illustrated by <span style="color: red;">Gege Akutami</span>. The story follows high school student <span class="genre">Yuji Itadori</span> as he joins a secret organization of Jujutsu Sorcerers to eliminate a powerful Curse named <span style="color: red;">Ryomen Sukuna</span>, of whom Yuji becomes the host.
+        </p>
+        <div class="controls">
+            <button id="playButton" class="watch-button">Play</button>
+            <button class="add-button">+ My List</button>
+        </div>
+    </div>
+
+    <script>
+        const videoPlayer = document.getElementById('videoPlayer');
+        const playButton = document.getElementById('playButton');
+
+        playButton.addEventListener('click', () => {
+            if (videoPlayer.paused || videoPlayer.ended) {
+                videoPlayer.play();
+                playButton.textContent = 'Pause';
+                playButton.classList.add('playing');
+                videoPlayer.muted = false; // Unmute the video when playing
+            } else {
+                videoPlayer.pause();
+                playButton.textContent = 'Play';
+                playButton.classList.remove('playing');
+            }
+        });
+    </script>
+</body>
+</html>
